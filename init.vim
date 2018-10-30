@@ -1,20 +1,22 @@
 call plug#begin()
 "solarized theme
 Plug 'https://github.com/altercation/vim-colors-solarized'
+Plug 'lifepillar/vim-solarized8'
 Plug 'powerline/powerline-fonts'
 Plug 'bling/vim-airline'
 Plug 'retorillo/airline-tablemode.vim'
-Plug 'ryanoasis/vim-webdevicons'
+"Plug 'ryanoasis/vim-webdevicons'
 Plug 'mhinz/vim-grepper'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'haya14busa/incsearch.vim'   
 Plug 'tpope/vim-commentary' 
 Plug 'dhruvasagar/vim-table-mode',        { 'on': 'TableModeEnable' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'othree/html5.vim'
 Plug 'hail2u/vim-css3-syntax',            { 'for': 'css' }
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'reedes/vim-pencil'   
+Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'godlygeek/tabular',                 { 'for': 'markdown' } " Needed for vim-markdown
 Plug 'plasticboy/vim-markdown',           { 'for': 'markdown' }
@@ -37,13 +39,24 @@ Plug 'skywind3000/asyncrun.vim'
 " post install (yarn install | npm install) then load plugin only for editing supported files
 "Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 call plug#end()
-
+let g:python3_host_prog = '/usr/local/bin/python3'
+"call remote#host#RegisterPlugin('/usr/local/bin/python3', '/Users/developer/.config/nvim/plugged/deoplete.nvim/rplugin/python3/deoplete.py', [
+"      \ {'sync': 1, 'name': 'DeopleteInitializePython', 'type': 'command', 'opts': {}},
+"     \ ])
 syntax enable
-
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 map <C-n> :NERDTreeToggle<CR>
 let g:airline_theme='solarized'
 let g:mapleader=' '
 map <Leader> <Plug>(easymotion-prefix)
+set updatetime=100
 set nowrap
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
@@ -57,9 +70,9 @@ set ignorecase
 set smartcase
 set number
 set numberwidth=5
-set background=dark
+set background=light
 colorscheme solarized
-
+"set clipboard=unnamed
 "let g:ale_javascript_eslint_use_global = 1
 
 " Make it obvious where 120 characters is {{{2
@@ -92,7 +105,10 @@ let g:user_emmet_settings = {
   \}
 let g:ale_sign_error = '●' " Less aggressive than the default '>>'
 let g:ale_sign_warning = '.'
-let g:ale_lint_on_enter = 0 " Less distracting when opening a new file  
+let g:ale_lint_on_enter = 1 " Less distracting when opening a new file  
+let g:ale_change_sign_column_color = 0
+highlight ALEErrorSign ctermfg=9 ctermbg=7 guifg=#C30500 guibg=#F5F5F5
+highlight ALEWarningSign ctermfg=11 ctermbg=7 guifg=#ED6237 guibg=#F5F5F5
 
 let g:ale_linters = {'javascript':['eslint']}
 let g:ale_fixers = {'javascript': ['prettier'] }
