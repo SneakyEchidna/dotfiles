@@ -33,6 +33,9 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'camspiers/animate.vim'
+Plug 'camspiers/lens.vim'
 call plug#end()
 let g:python3_host_prog = '/usr/local/bin/python3'
 set encoding=utf8
@@ -81,6 +84,7 @@ nmap <silent> ]c <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gs :call CocAction('jumpDefinition', 'vsplit')
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -176,7 +180,11 @@ highlight GitGutterDelete  ctermfg=Red ctermbg=Black
 hi SignColumn ctermbg=Black
 
 nnoremap <silent><Leader><Leader> :CtrlP<CR>
+
 nnoremap <silent><Leader>/ :Grepper<CR>
+nmap gs  <plug>(GrepperOperator)
+xmap gs  <plug>(GrepperOperator)
+
 
 " navigate chunks of current buffer
 nmap [g <Plug>(coc-git-prevchunk)
@@ -195,3 +203,8 @@ let g:tsuquyomi_use_vimproc=1
 :autocmd InsertEnter,InsertLeave * set cul!
 let g:NERDTreeHighlightFolders = 1 " enables folder icon highlighting using exact match
 let g:NERDTreeHighlightFoldersFullName = 1 " highlights the folder name
+
+tnoremap kj <C-\><C-n>
+
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)

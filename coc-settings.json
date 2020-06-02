@@ -15,5 +15,10 @@
    "git.removedSign.hlGroup": "GitGutterDelete",
    "git.topRemovedSign.hlGroup": "GitGutterDelete",
    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-   "html.format.enable": true
+   "html.format.enable": true,
+   "stylelintplus.autoFixOnSave": true,
+   "coc.preferences.formatOnSaveFiletypes": [
+     "dart",
+     "scss"
+   ]
 }
